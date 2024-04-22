@@ -8,8 +8,9 @@ html {
 body {
     position: relative;
     width: 100vw;
-    height: 100vh;
     background-color: #ADD4D0;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body,

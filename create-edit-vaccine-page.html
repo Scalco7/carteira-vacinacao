@@ -36,7 +36,48 @@
         </aside>
     </header>
     <main id="content">
-
+        <button id="delete-button" class="primary-button">
+            <img src="static/img/trash.png">
+            Excluir
+        </button>
+        <form>
+            <div class="form-row">
+                <p class="input-title">Data da vacinação</p>
+                <input id="date-input" type="date">
+            </div>
+            <div class="form-row">
+                <p class="input-title">Vacina</p>
+                <input type="text">
+            </div>
+            <div class="form-row">
+                <p class="input-title">Dose</p>
+                <input type="radio" id="1" name="dose" class="radio-input">
+                <label for="1" class="radio-label">1a. dose</label>
+                <input type="radio" id="2" name="dose" class="radio-input">
+                <label for="2" class="radio-label">2a. dose</label>
+                <input type="radio" id="3" name="dose" class="radio-input">
+                <label for="3" class="radio-label">3a. dose</label>
+                <input type="radio" id="4" name="dose" class="radio-input">
+                <label for="4" class="radio-label">Reforço</label>
+                <input type="radio" id="5" name="dose" class="radio-input">
+                <label for="5" class="radio-label">Dose única</label>
+            </div>
+            <div class="form-row">
+                <p class="input-title">Comprovante da vacina</p>
+                <div id="file-input-column">
+                    <label id="box-file-input">
+                        Selecionar imagem...
+                        <input id="file-input" type="file" accept="image/*" onchange="saveProof(event)">
+                    </label>
+                    <img id="proof-img">
+                </div>
+            </div>
+            <div class="form-row">
+                <p class="input-title">Próxima vacinação</p>
+                <input id="date-input" type="date">
+            </div>
+        </form>
+        <button class="secondary-button" onclick="save()">Salvar alterações</button>
     </main>
 </body>
 <script type="text/javascript" src="static/pages/create-edit-vaccine-page/script.js"></script>
