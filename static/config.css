@@ -56,6 +56,11 @@ div {
         object-fit: contain;
         height: 100%;
     }
+
+    aside {
+        display: flex;
+        gap: 20px;
+    }
 }
 
 .primary-button {

@@ -1,0 +1,123 @@
+#content {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    height: 90%;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+#input-box {
+    position: relative;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+
+    #icon-button-box {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 5%;
+        background-color: white;
+    }
+
+    img {
+        object-fit: contain;
+    }
+
+    input {
+        font-family: "Averia Libre", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        background-color: white;
+        color: #8B8B8B;
+        font-size: 20px;
+        border: none;
+        box-shadow: none;
+        padding: 5px 15px;
+        width: 90%;
+    }
+
+    input::placeholder {
+        color: #8B8B8B;
+    }
+
+    input:focus {
+        border: none;
+        outline: none;
+    }
+}
+
+#vaccine-list-box {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 10px;
+    gap: 50px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.vaccine-box {
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 15px 32px 15px;
+    cursor: pointer;
+    box-shadow: none;
+    transition: box-shadow 0.3s ease-in;
+
+    h5 {
+        color: #3F92C5;
+        font-size: 36px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    #box-dose {
+        background: #3F92C5;
+        padding: 5px;
+        color: white;
+    }
+
+    #date-text {
+        color: #8B8B8B;
+    }
+
+    img {
+        position: relative;
+        width: 100%;
+        height: 145px;
+        object-fit: contain;
+    }
+
+    #next-time-alert {
+        position: absolute;
+        bottom: 2px;
+        right: 5px;
+        color: #FD7979;
+    }
+}
+
+.vaccine-box:hover {
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    transition: box-shadow 0.2s ease-in;
+}
