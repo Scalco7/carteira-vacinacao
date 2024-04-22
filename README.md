@@ -1,0 +1,1 @@
+Projeto feito em HTML/CSS/JS para convalidar meus conhecimentos em programação WEB Front-End esse projeto utiliza o FireBase para armazenar as infromações necessárias de cada certificado de vacinação;
