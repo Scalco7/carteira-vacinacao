@@ -40,4 +40,17 @@ body {
         object-fit: contain;
         height: 60%;
     }
+
+    button {
+        font-family: "Averia Libre", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        border: 0px;
+        padding: 10px;
+        background: #419ED7;
+        color: white;
+        box-shadow: 0px 4px 4px 0px #00000040;
+        font-size: 18px;
+        cursor: pointer;
+    }
 }
