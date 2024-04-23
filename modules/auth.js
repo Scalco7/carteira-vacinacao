@@ -5,40 +5,40 @@ async function register(name, gender, birthDate, email, password, confirmPasswor
         return {
             status: false,
             response: "Nome inválido"
-        }
+        };
     }
     if (!validateField(gender)) {
         return {
             status: false,
             response: "Gênero inválido"
-        }
+        };
     }
     if (!validateField(birthDate)) {
         return {
             status: false,
             response: "Data de nascimento inválida"
-        }
+        };
     }
 
     if (!validateEmail(email)) {
         return {
             status: false,
             response: "E-mail inválido"
-        }
+        };
     }
 
     if (!validatePassword(password)) {
         return {
             status: false,
             response: "Senha inválida"
-        }
+        };
     }
 
     if (password != confirmPassword) {
         return {
             status: false,
             response: "Senhas diferentes"
-        }
+        };
     }
 
     const register = await fireRegister(email, password);
@@ -50,13 +50,13 @@ async function login(email, password) {
         return {
             status: false,
             response: "E-mail ou senha inválidos"
-        }
+        };
     }
     if (!validatePassword(password)) {
         return {
             status: false,
             response: "E-mail ou senha inválidos"
-        }
+        };
     }
 
     const login = await fireLogin(email, password);

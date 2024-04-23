@@ -1,3 +1,3 @@
 function changePassword() {
-    console.log("recuperando senha aguarde 30, 29, 28")
+    console.log("recuperando senha aguarde 30, 29, 28");
 }

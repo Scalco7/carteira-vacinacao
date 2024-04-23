@@ -8,12 +8,12 @@ async function fireRegister(email, password) {
         return {
             status: true,
             response: response,
-        }
+        };
     } catch (error) {
         return {
             status: false,
             response: "E-mail já cadastrado",
-        }
+        };
     }
 }
 
@@ -25,12 +25,12 @@ async function fireLogin(email, password) {
         return {
             status: true,
             response: response,
-        }
+        };
     } catch (error) {
         return {
             status: false,
             response: "E-mail ou senha inválidos",
-        }
+        };
     }
 }
 
