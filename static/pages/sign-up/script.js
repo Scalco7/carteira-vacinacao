@@ -1,3 +1,3 @@
-function signUp() {
-    console.log("fazendo cadastro - fazer função direito")
-}
+import { signUp } from "../../../modules/firebaseAuth.js"
+
+window.signUp = signUp
