@@ -49,13 +49,13 @@ async function login(email, password) {
     if (!validateEmail(email)) {
         return {
             status: false,
-            response: "E-mail inválido"
+            response: "E-mail ou senha inválidos"
         }
     }
     if (!validatePassword(password)) {
         return {
             status: false,
-            response: "Senha inválida"
+            response: "E-mail ou senha inválidos"
         }
     }
 

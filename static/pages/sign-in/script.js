@@ -10,5 +10,6 @@ async function signIn() {
 
     if (loginResponse.status)
         window.location.href = "home-page.html"
-    else alert(loginResponse.response)
+    else
+        document.getElementById('alert-text').innerText = loginResponse.response
 }

@@ -14,5 +14,6 @@ async function signUp() {
 
     if (registerResponse.status)
         window.location.href = "sign-in-page.html"
-    else alert(registerResponse.response)
+    else
+        document.getElementById('alert-text').innerText = registerResponse.response
 }
