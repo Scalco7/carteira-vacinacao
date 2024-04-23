@@ -14,5 +14,5 @@ async function signUp() {
 
     if (registerResponse.status)
         window.location.href = "sign-in-page.html"
-    else alert('erro no cadastro')
+    else alert(registerResponse.response)
 }

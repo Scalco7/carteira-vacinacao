@@ -10,5 +10,5 @@ async function signIn() {
 
     if (loginResponse.status)
         window.location.href = "home-page.html"
-    else alert('erro no login')
+    else alert(loginResponse.response)
 }
