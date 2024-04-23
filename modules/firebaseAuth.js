@@ -1,17 +1,37 @@
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-export function signUp() {
-    console.log("fazendo cadastro - fazer função direito")
-
+async function fireRegister(email, password) {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, "fscalco7@gmail.com", "020305")
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user)
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(error)
-        });
+
+    try {
+        const response = await createUserWithEmailAndPassword(auth, email, password);
+        return {
+            status: true,
+            response: response,
+        }
+    } catch (error) {
+        return {
+            status: false,
+            response: error.message,
+        }
+    }
 }
+
+async function fireLogin(email, password) {
+    const auth = getAuth();
+
+    try {
+        const response = await signInWithEmailAndPassword(auth, email, password);
+        return {
+            status: true,
+            response: response,
+        }
+    } catch (error) {
+        return {
+            status: false,
+            response: error.message,
+        }
+    }
+}
+
+export { fireLogin, fireRegister }
