@@ -54,7 +54,7 @@ async function register(name, gender, birthDate, email, password, confirmPasswor
             vaccines: []
         }
 
-        createUser(register.response.user.uid, userObject);
+        await createUser(register.response.user.uid, userObject);
     }
 
     return register;
