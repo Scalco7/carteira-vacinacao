@@ -36,30 +36,30 @@
         </aside>
     </header>
     <main id="content">
-        <button id="delete-button" class="primary-button">
+        <button id="delete-button" class="primary-button" onclick="deleteVaccine()">
             <img src="static/img/trash.png">
             Excluir
         </button>
         <form>
             <div class="form-row">
                 <p class="input-title">Data da vacinação</p>
-                <input id="date-input" type="date">
+                <input id="vaccine-date" class="date-input" type="date">
             </div>
             <div class="form-row">
                 <p class="input-title">Vacina</p>
-                <input type="text">
+                <input type="text" id="vaccine-name">
             </div>
             <div class="form-row">
                 <p class="input-title">Dose</p>
-                <input type="radio" id="1" name="dose" class="radio-input">
+                <input type="radio" id="1" name="dose" class="radio-input" value="1a. dose">
                 <label for="1" class="radio-label">1a. dose</label>
-                <input type="radio" id="2" name="dose" class="radio-input">
+                <input type="radio" id="2" name="dose" class="radio-input" value="2. dose">
                 <label for="2" class="radio-label">2a. dose</label>
-                <input type="radio" id="3" name="dose" class="radio-input">
+                <input type="radio" id="3" name="dose" class="radio-input" value="3a. dose">
                 <label for="3" class="radio-label">3a. dose</label>
-                <input type="radio" id="4" name="dose" class="radio-input">
+                <input type="radio" id="4" name="dose" class="radio-input" value="Reforço">
                 <label for="4" class="radio-label">Reforço</label>
-                <input type="radio" id="5" name="dose" class="radio-input">
+                <input type="radio" id="5" name="dose" class="radio-input" value="Dose única">
                 <label for="5" class="radio-label">Dose única</label>
             </div>
             <div class="form-row">
@@ -74,10 +74,10 @@
             </div>
             <div class="form-row">
                 <p class="input-title">Próxima vacinação</p>
-                <input id="date-input" type="date">
+                <input id="next-vaccine-date" class="date-input" type="date">
             </div>
         </form>
-        <button class="secondary-button" onclick="saveVaccine()">Salvar alterações</button>
+        <button id="final-button" class="secondary-button" onclick="saveVaccine()"></button>
     </main>
 </body>
 <script type="module" src="./modules/firebase.js"></script>

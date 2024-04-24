@@ -49,8 +49,8 @@ function renderVaccineList(list) {
         }
     ]
 
-    const vaccinesHtml = list.map(vaccine => `
-        <div class="vaccine-box">
+    const vaccinesHtml = list.map((vaccine, index) => `
+        <div class="vaccine-box" onclick="navigateToPage('create-edit-vaccine-page.html?vaccine=${index}')">
             <h5>${vaccine.name}</h5>
             <div id="box-dose">
                 <p>${vaccine.dose}</p>

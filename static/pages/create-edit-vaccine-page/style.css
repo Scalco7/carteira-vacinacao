@@ -28,6 +28,10 @@ form {
     gap: 10px;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .input-title {
     color: white;
     text-align: right;
@@ -52,7 +56,7 @@ input::placeholder {
     color: #3F92C5;
 }
 
-#date-input {
+.date-input {
     width: auto;
 }
 

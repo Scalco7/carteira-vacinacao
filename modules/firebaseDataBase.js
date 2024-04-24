@@ -6,6 +6,13 @@ async function createUser(userUid, userObject) {
     await set(dbRef, userObject);
 }
 
+async function createVaccine(userUid, vaccineObject) {
+    const db = await getDatabase();
+    const vaccineId = Date.now();
+    const dbRef = await ref(db, "users/" + userUid + "/vaccines/" + vaccineId);
+    await set(dbRef, vaccineObject);
+}
+
 async function getUser(userUid) {
     const db = await getDatabase();
     const dbRef = ref(db);
@@ -35,4 +42,4 @@ async function getUser(userUid) {
     }
 }
 
-export { createUser, getUser }
+export { createUser, createVaccine, getUser }
