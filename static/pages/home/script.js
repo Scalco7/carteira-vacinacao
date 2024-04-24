@@ -32,7 +32,8 @@ function formatNextDose(date) {
 }
 
 function renderVaccineList(list) {
-    const vaccinesHtml = Object.keys(list).map((key) => `
+    if (Object.keys(list).length > 0) {
+        const vaccinesHtml = Object.keys(list).map((key) => `
         <div class="vaccine-box" onclick="navigateToPage('create-edit-vaccine-page.html?vaccine=${key}')">
             <h5>${list[key].name}</h5>
             <div id="box-dose">
@@ -46,7 +47,11 @@ function renderVaccineList(list) {
                 ${formatNextDose(list[key].nextDose)}
             </p>
         </div>`
-    );
+        );
 
-    document.getElementById("vaccine-list-box").innerHTML = vaccinesHtml;
+        document.getElementById("vaccine-list-box").innerHTML = vaccinesHtml;
+    }
+    else {
+        document.getElementById("vaccine-list-box").innerHTML = `<h3>Ainda não tem vacinas cadastradas</h3>`;
+    }
 }
