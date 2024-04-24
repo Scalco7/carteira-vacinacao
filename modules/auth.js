@@ -1,4 +1,5 @@
 import { fireRegister, fireLogin } from "./firebaseAuth.js";
+import { createUser } from "./firebaseDataBase.js";
 
 async function register(name, gender, birthDate, email, password, confirmPassword) {
     if (!validateField(name)) {
@@ -42,6 +43,20 @@ async function register(name, gender, birthDate, email, password, confirmPasswor
     }
 
     const register = await fireRegister(email, password);
+
+    if (register.status) {
+        const userObject = {
+            name: name,
+            gender: gender,
+            birthDate: birthDate,
+            email: email,
+            creationDate: Date(),
+            vaccines: []
+        }
+
+        createUser(register.response.user.uid, userObject);
+    }
+
     return register;
 }
 
