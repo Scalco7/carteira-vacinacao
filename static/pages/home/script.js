@@ -65,7 +65,7 @@ function renderVaccineList(list) {
         </div>`
         );
 
-        document.getElementById("vaccine-list-box").innerHTML = vaccinesHtml;
+        document.getElementById("vaccine-list-box").innerHTML = vaccinesHtml.toString().replaceAll(",", "");
     }
     else {
         document.getElementById("vaccine-list-box").innerHTML = `<h3>Sem vacinas encontradas</h3>`;
