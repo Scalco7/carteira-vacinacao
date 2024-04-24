@@ -1,5 +1,5 @@
 import { fireRegister, fireLogin } from "./firebaseAuth.js";
-import { createUser } from "./firebaseDataBase.js";
+import { createUser, getUser } from "./firebaseDataBase.js";
 
 async function register(name, gender, birthDate, email, password, confirmPassword) {
     if (!validateField(name)) {
@@ -83,6 +83,15 @@ async function logout() {
     localStorage.removeItem("user-uid");
 }
 
+async function verifyLogin() {
+    const userUid = localStorage.getItem("user-uid");
+    const response = await getUser(userUid);
+    if (response.status)
+        return response.response;
+
+    navigateToPage("landing-page.html");
+}
+
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
@@ -96,4 +105,4 @@ function validateField(value) {
     return value != null && value != '' && value.length > 0;
 }
 
-export { register, login, logout }
+export { register, login, logout, verifyLogin }
