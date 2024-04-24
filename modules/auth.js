@@ -75,7 +75,12 @@ async function login(email, password) {
     }
 
     const login = await fireLogin(email, password);
+    await localStorage.setItem("user-uid", login.response.user.uid);
     return login;
+}
+
+async function logout() {
+    localStorage.removeItem("user-uid");
 }
 
 function validateEmail(email) {
@@ -91,4 +96,4 @@ function validateField(value) {
     return value != null && value != '' && value.length > 0;
 }
 
-export { register, login }
+export { register, login, logout }
