@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
 async function fireRegister(email, password) {
     const auth = getAuth();
@@ -34,4 +34,21 @@ async function fireLogin(email, password) {
     }
 }
 
-export { fireLogin, fireRegister }
+async function fireRecoveryPassword(email) {
+    const auth = getAuth();
+
+    try {
+        await sendPasswordResetEmail(auth, email);
+        return {
+            status: true,
+            response: "E-mail enviado",
+        };
+    } catch (error) {
+        return {
+            status: false,
+            response: "E-mail inválido",
+        };
+    }
+}
+
+export { fireLogin, fireRegister, fireRecoveryPassword }

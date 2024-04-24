@@ -46,3 +46,16 @@ input {
 input::placeholder {
     color: #3F92C5;
 }
+
+#alert-text {
+    height: 24px;
+    font-size: 20px;
+}
+
+.red {
+    color: #FD7979;
+}
+
+.green {
+    color: #7984fd;
+}

@@ -75,7 +75,10 @@ async function login(email, password) {
     }
 
     const login = await fireLogin(email, password);
-    await localStorage.setItem("user-uid", login.response.user.uid);
+
+    if (login.status)
+        await localStorage.setItem("user-uid", login.response.user.uid);
+
     return login;
 }
 
