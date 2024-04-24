@@ -2,9 +2,11 @@ import { logout, verifyLogin } from "../../../modules/auth.js"
 
 window.navigateToPage = navigateToPage;
 window.logout = logoutUser;
+window.search = search;
 
 const user = await verifyLogin();
-const vaccinesList = user?.vaccines ?? [];
+const vaccinesList = getVaccines(user?.vaccines);
+
 renderVaccineList(vaccinesList);
 
 function navigateToPage(page) {
@@ -14,6 +16,20 @@ function navigateToPage(page) {
 function logoutUser() {
     logout();
     navigateToPage("landing-page.html");
+}
+
+function getVaccines(vaccineObj) {
+    if (!vaccineObj)
+        return [];
+
+    return Object.keys(vaccineObj).map(key => ({ ...vaccineObj[key], id: key }))
+}
+
+function search() {
+    const value = document.getElementById("search-input").value;
+    const list = vaccinesList.filter(vaccine => vaccine.name.includes(value));
+
+    renderVaccineList(list);
 }
 
 function formatDate(date) {
@@ -32,19 +48,19 @@ function formatNextDose(date) {
 }
 
 function renderVaccineList(list) {
-    if (Object.keys(list).length > 0) {
-        const vaccinesHtml = Object.keys(list).map((key) => `
-        <div class="vaccine-box" onclick="navigateToPage('create-edit-vaccine-page.html?vaccine=${key}')">
-            <h5>${list[key].name}</h5>
+    if (list.length > 0) {
+        const vaccinesHtml = list.map((vaccine) => `
+        <div class="vaccine-box" onclick="navigateToPage('create-edit-vaccine-page.html?vaccine=${vaccine.id}')">
+            <h5>${vaccine.name}</h5>
             <div id="box-dose">
-                <p>${list[key].dose}</p>
+                <p>${vaccine.dose}</p>
             </div>
             <p id="date-text">
-                ${formatDate(list[key].date)}
+                ${formatDate(vaccine.date)}
             </p>
             <img>
             <p id="next-time-alert">
-                ${formatNextDose(list[key].nextDose)}
+                ${formatNextDose(vaccine.nextDose)}
             </p>
         </div>`
         );
@@ -52,6 +68,6 @@ function renderVaccineList(list) {
         document.getElementById("vaccine-list-box").innerHTML = vaccinesHtml;
     }
     else {
-        document.getElementById("vaccine-list-box").innerHTML = `<h3>Ainda não tem vacinas cadastradas</h3>`;
+        document.getElementById("vaccine-list-box").innerHTML = `<h3>Sem vacinas encontradas</h3>`;
     }
 }
