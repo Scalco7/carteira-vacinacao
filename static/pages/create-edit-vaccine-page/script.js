@@ -32,8 +32,7 @@ function saveVaccine() {
     isEdditing ? edit() : create();
 }
 
-function create() {
-
+async function create() {
     const name = document.getElementById("vaccine-name").value;
     const date = document.getElementById("vaccine-date").value;
     const nextDose = document.getElementById("next-vaccine-date")?.value ?? null;
@@ -57,7 +56,8 @@ function create() {
         dose: dose
     }
 
-    createVaccine(uid, vaccineObject);
+    await createVaccine(uid, vaccineObject);
+    navigateToPage("home-page.html");
 }
 
 function edit() {

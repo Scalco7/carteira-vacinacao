@@ -7,8 +7,6 @@ const user = await verifyLogin();
 const vaccinesList = user?.vaccines ?? [];
 renderVaccineList(vaccinesList);
 
-console.log(vaccinesList);
-
 function navigateToPage(page) {
     window.location.href = page;
 }
@@ -34,37 +32,21 @@ function formatNextDose(date) {
 }
 
 function renderVaccineList(list) {
-    list = [
-        {
-            name: "BCG",
-            dose: "Dose única",
-            date: new Date('11-06-2022'),
-            nextDose: null,
-        },
-        {
-            name: "Hepatite B",
-            dose: "1a Dose",
-            date: new Date('11-08-2022'),
-            nextDose: new Date('11-12-2023'),
-        }
-    ]
-
-    const vaccinesHtml = list.map((vaccine, index) => `
-        <div class="vaccine-box" onclick="navigateToPage('create-edit-vaccine-page.html?vaccine=${index}')">
-            <h5>${vaccine.name}</h5>
+    const vaccinesHtml = Object.keys(list).map((key) => `
+        <div class="vaccine-box" onclick="navigateToPage('create-edit-vaccine-page.html?vaccine=${key}')">
+            <h5>${list[key].name}</h5>
             <div id="box-dose">
-                <p>${vaccine.dose}</p>
+                <p>${list[key].dose}</p>
             </div>
             <p id="date-text">
-                ${formatDate(vaccine.date)}
+                ${formatDate(list[key].date)}
             </p>
             <img>
             <p id="next-time-alert">
-                ${formatNextDose(vaccine.nextDose)}
+                ${formatNextDose(list[key].nextDose)}
             </p>
         </div>`
     );
 
-
-    const box = document.getElementById("vaccine-list-box").innerHTML = vaccinesHtml;
+    document.getElementById("vaccine-list-box").innerHTML = vaccinesHtml;
 }
