@@ -30,7 +30,7 @@
             <button class="primary-button" onclick="navigateToPage('home-page.html')">
                 Minhas vacinas
             </button>
-            <button class="primary-button">
+            <button class="primary-button" onclick="logout()">
                 Logout
             </button>
         </aside>
@@ -77,10 +77,10 @@
                 <input id="date-input" type="date">
             </div>
         </form>
-        <button class="secondary-button" onclick="save()">Salvar alterações</button>
+        <button class="secondary-button" onclick="saveVaccine()">Salvar alterações</button>
     </main>
 </body>
 <script type="module" src="./modules/firebase.js"></script>
-<script type="text/javascript" src="static/pages/create-edit-vaccine-page/script.js"></script>
+<script type="module" src="static/pages/create-edit-vaccine-page/script.js"></script>
 
 </html>

@@ -1,10 +1,17 @@
+import { logout } from "../../../modules/auth.js";
+
+window.navigateToPage = navigateToPage;
+window.logout = logoutUser;
+window.saveProof = saveProof;
+window.saveVaccine = saveVaccine;
+
 const img = document.querySelector('#proof-img');
 
 function navigateToPage(page) {
     window.location.href = page;
 }
 
-function save() {
+function saveVaccine() {
     console.log("salvando");
 }
 
@@ -19,4 +26,9 @@ function saveProof(evt) {
     }
 
     r.readAsDataURL(evt.target.files[0]);
+}
+
+function logoutUser() {
+    logout();
+    navigateToPage("landing-page.html");
 }
