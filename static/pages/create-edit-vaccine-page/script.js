@@ -1,38 +1,56 @@
 import { logout, verifyLogin } from "../../../modules/auth.js";
-import { createVaccine } from "../../../modules/firebaseDataBase.js"
+import { createVaccine, getVaccine, updateVaccine, deleteVaccine } from "../../../modules/firebaseDataBase.js"
 
 window.navigateToPage = navigateToPage;
 window.logout = logoutUser;
 window.saveProof = saveProof;
 window.saveVaccine = saveVaccine;
-window.deleteVaccine = deleteVaccine;
+window.removeVaccine = removeVaccine;
 
 const user = await verifyLogin();
+const userUid = localStorage.getItem("user-uid");
 const img = document.querySelector('#proof-img');
 
-var urlAtual = window.location.href;
-var urlClass = new URL(urlAtual);
-var vaccineId = urlClass.searchParams.get("vaccine");
+const urlClass = new URL(window.location.href);
+const vaccineId = urlClass.searchParams.get("vaccine");
 const isEdditing = !vaccineId ? false : true;
 
-renderPage();
+await renderPage();
 
 function navigateToPage(page) {
     window.location.href = page;
 }
 
-function renderPage() {
+async function renderPage() {
     document.getElementById('final-button').innerHTML = isEdditing ? "Salvar alterações" : "Cadastrar";
 
-    if (!isEdditing)
+    if (!isEdditing) {
         document.getElementById('delete-button').classList.add("hidden");
+        return;
+    }
+
+    const vaccineResponse = await getVaccine(userUid, vaccineId);
+
+    if (!vaccineResponse.status) {
+        navigateToPage("home-page.html");
+        return;
+    }
+
+    const vaccine = vaccineResponse.response;
+
+    const nameInput = document.getElementById("vaccine-name");
+    const dateInput = document.getElementById("vaccine-date");
+    const nextDoseInput = document.getElementById("next-vaccine-date");
+    const doseInput = document.querySelector(`input[value="${vaccine.dose}"]`);
+
+    nameInput.value = vaccine.name;
+    dateInput.value = new Date(vaccine.date).toISOString().substring(0, 10);
+    doseInput.checked = true;
+    if (vaccine.nextDose)
+        nextDoseInput.value = new Date(vaccine.nextDose).toISOString().substring(0, 10)
 }
 
-function saveVaccine() {
-    isEdditing ? edit() : create();
-}
-
-async function create() {
+async function saveVaccine() {
     const name = document.getElementById("vaccine-name").value;
     const date = document.getElementById("vaccine-date").value;
     const nextDose = document.getElementById("next-vaccine-date")?.value ?? null;
@@ -47,7 +65,6 @@ async function create() {
     if (!validateField(dose)) {
         alert("Selecione uma dose válida"); return;
     }
-    const uid = localStorage.getItem("user-uid");
 
     const vaccineObject = {
         name: name,
@@ -56,16 +73,17 @@ async function create() {
         dose: dose
     }
 
-    await createVaccine(uid, vaccineObject);
+    if (isEdditing)
+        await updateVaccine(userUid, vaccineId, vaccineObject)
+    else
+        await createVaccine(userUid, vaccineObject);
+
     navigateToPage("home-page.html");
 }
 
-function edit() {
-    console.log("editando vacina")
-}
-
-function deleteVaccine() {
-    console.log("Apagando vacina")
+async function removeVaccine() {
+    await deleteVaccine(userUid, vaccineId);
+    navigateToPage("home-page.html");
 }
 
 function saveProof(evt) {
