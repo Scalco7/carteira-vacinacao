@@ -22,7 +22,28 @@ function getVaccines(vaccineObj) {
     if (!vaccineObj)
         return [];
 
-    return Object.keys(vaccineObj).map(key => ({ ...vaccineObj[key], id: key }))
+    let list = Object.keys(vaccineObj).map(key => ({ ...vaccineObj[key], id: key }));
+    return list.sort(compareVaccines);
+}
+
+function compareVaccines(a, b) {
+    const nameA = a.name.toUpperCase();
+    const nameB = b.name.toUpperCase();
+
+    if (nameA < nameB)
+        return -1;
+    if (nameA > nameB)
+        return 1;
+
+    const doseA = a.dose.toUpperCase();
+    const doseB = b.dose.toUpperCase();
+
+    if (doseA < doseB)
+        return -1;
+    if (doseA > doseB)
+        return 1;
+
+    return 0;
 }
 
 function search() {
