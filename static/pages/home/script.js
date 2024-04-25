@@ -1,4 +1,7 @@
 import { logout, verifyLogin } from "../../../modules/auth.js"
+import { startLoading, stopLoading } from "../../../modules/loading.js";
+
+startLoading();
 
 window.navigateToPage = navigateToPage;
 window.logout = logoutUser;
@@ -8,6 +11,9 @@ const user = await verifyLogin();
 const vaccinesList = getVaccines(user?.vaccines);
 
 renderVaccineList(vaccinesList);
+
+stopLoading();
+
 
 function navigateToPage(page) {
     window.location.href = page;

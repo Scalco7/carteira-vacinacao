@@ -22,6 +22,23 @@
 </head>
 
 <body>
+    <section id="loading-screen">
+        <div class="container">
+            <div class="dot dot-1"></div>
+            <div class="dot dot-2"></div>
+            <div class="dot dot-3"></div>
+        </div>
+
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur result="blur" stdDeviation="10" in="SourceGraphic"></feGaussianBlur>
+                    <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7" mode="matrix" in="blur">
+                    </feColorMatrix>
+                </filter>
+            </defs>
+        </svg>
+    </section>
     <img class="background-img" src="static/img/background.jpeg">
     <header class="header">
         <a>
@@ -41,6 +58,6 @@
     </main>
 </body>
 <script type="module" src="./modules/firebase.js"></script>
-<script type="text/javascript" src="static/pages/landing-page/script.js"></script>
+<script type="module" src="static/pages/landing-page/script.js"></script>
 
 </html>

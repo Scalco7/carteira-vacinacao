@@ -28,10 +28,6 @@ form {
     gap: 10px;
 }
 
-.hidden {
-    visibility: hidden;
-}
-
 .input-title {
     color: white;
     text-align: right;

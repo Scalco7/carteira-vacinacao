@@ -1,5 +1,6 @@
 import { logout, verifyLogin } from "../../../modules/auth.js";
 import { createVaccine, getVaccine, updateVaccine, deleteVaccine } from "../../../modules/firebaseDataBase.js"
+import { startLoading, stopLoading } from "../../../modules/loading.js";
 
 window.navigateToPage = navigateToPage;
 window.logout = logoutUser;
@@ -19,6 +20,8 @@ const isEdditing = !vaccineId ? false : true;
 
 await renderPage();
 
+stopLoading();
+
 function navigateToPage(page) {
     window.location.href = page;
 }
@@ -26,11 +29,10 @@ function navigateToPage(page) {
 async function renderPage() {
     document.getElementById('final-button').innerHTML = isEdditing ? "Salvar alterações" : "Cadastrar";
 
-    if (!isEdditing) {
-        document.getElementById('delete-button').classList.add("hidden");
+    if (!isEdditing)
         return;
-    }
 
+    document.getElementById('delete-button').classList.remove("hidden");
     const vaccineResponse = await getVaccine(userUid, vaccineId);
 
     if (!vaccineResponse.status) {
@@ -53,19 +55,26 @@ async function renderPage() {
 }
 
 async function saveVaccine() {
+    startLoading();
     const name = document.getElementById("vaccine-name").value;
     const date = document.getElementById("vaccine-date").value;
     const nextDose = document.getElementById("next-vaccine-date")?.value ?? null;
     const dose = document.querySelector('input[name="dose"]:checked')?.value ?? '';
 
     if (!validateField(name)) {
-        alert("Coloque um nome válido"); return;
+        stopLoading();
+        alert("Coloque um nome válido");
+        return;
     }
     if (!validateField(date)) {
-        alert("Coloque uma data válida"); return;
+        stopLoading();
+        alert("Coloque uma data válida");
+        return;
     }
     if (!validateField(dose)) {
-        alert("Selecione uma dose válida"); return;
+        stopLoading();
+        alert("Selecione uma dose válida");
+        return;
     }
 
     const vaccineObject = {
@@ -80,15 +89,19 @@ async function saveVaccine() {
     else
         await createVaccine(userUid, vaccineObject);
 
+    stopLoading();
     navigateToPage("home-page.html");
 }
 
 async function removeVaccine() {
+    startLoading();
     await deleteVaccine(userUid, vaccineId);
+    stopLoading();
     navigateToPage("home-page.html");
 }
 
 function saveProof(evt) {
+    startLoading();
     if (!(evt.target && evt.target.files && evt.target.files.length > 0)) {
         return;
     }
@@ -99,14 +112,17 @@ function saveProof(evt) {
     }
 
     r.readAsDataURL(evt.target.files[0]);
+    stopLoading();
 }
 
 function validateField(value) {
     return value != null && value != '' && value.length > 0;
 }
 
-function logoutUser() {
-    logout();
+async function logoutUser() {
+    startLoading();
+    await logout();
+    stopLoading();
     navigateToPage("landing-page.html");
 }
 

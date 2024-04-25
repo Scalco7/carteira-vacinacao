@@ -1,8 +1,11 @@
 import { register } from "../../../modules/auth.js";
+import { startLoading, stopLoading } from "../../../modules/loading.js";
 
 window.signUp = signUp;
+stopLoading();
 
 async function signUp() {
+    startLoading();
     const name = document.getElementById("full-name").value;
     const gender = document.querySelector('input[name="gender"]:checked')?.value ?? '';
     const birthDate = document.getElementById("date-input").value;
@@ -16,4 +19,6 @@ async function signUp() {
         window.location.href = "sign-in-page.html";
     else
         document.getElementById('alert-text').innerText = registerResponse.response;
+
+    stopLoading();
 }
