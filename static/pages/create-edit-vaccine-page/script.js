@@ -5,6 +5,8 @@ window.navigateToPage = navigateToPage;
 window.logout = logoutUser;
 window.saveProof = saveProof;
 window.saveVaccine = saveVaccine;
+window.openRemoveDialog = openRemoveDialog;
+window.closeRemoveDialog = closeRemoveDialog;
 window.removeVaccine = removeVaccine;
 
 const user = await verifyLogin();
@@ -106,4 +108,12 @@ function validateField(value) {
 function logoutUser() {
     logout();
     navigateToPage("landing-page.html");
+}
+
+function openRemoveDialog() {
+    document.getElementById('dialog-screen').classList.remove('hidden');
+}
+
+function closeRemoveDialog() {
+    document.getElementById('dialog-screen').classList.add('hidden');
 }

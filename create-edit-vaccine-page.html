@@ -36,7 +36,7 @@
         </aside>
     </header>
     <main id="content">
-        <button id="delete-button" class="primary-button" onclick="removeVaccine()">
+        <button id="delete-button" class="primary-button delete-button" onclick="openRemoveDialog()">
             <img src="static/img/trash.png">
             Excluir
         </button>
@@ -79,6 +79,19 @@
         </form>
         <button id="final-button" class="secondary-button" onclick="saveVaccine()"></button>
     </main>
+    <div id="dialog-screen" class="hidden">
+        <section id="dialog-box">
+            <h2>Tem certeza que deseja remover esta vacina?</h2>
+            <div>
+                <button class="primary-button delete-button" onclick="removeVaccine()">
+                    Remover
+                </button>
+                <button class="primary-button" onclick="closeRemoveDialog()">
+                    Cancelar
+                </button>
+            </div>
+        </section>
+    </div>
 </body>
 <script type="module" src="./modules/firebase.js"></script>
 <script type="module" src="static/pages/create-edit-vaccine-page/script.js"></script>
