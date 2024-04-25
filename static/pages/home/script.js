@@ -85,14 +85,14 @@ function renderVaccineList(list) {
             <p id="date-text">
                 ${formatDate(vaccine.date)}
             </p>
-            <img>
+            <img src="${vaccine.proofImg}">
             <p id="next-time-alert">
                 ${formatNextDose(vaccine.nextDose)}
             </p>
         </div>`
         );
 
-        document.getElementById("vaccine-list-box").innerHTML = vaccinesHtml.toString().replaceAll(",", "");
+        document.getElementById("vaccine-list-box").innerHTML = vaccinesHtml;
     }
     else {
         document.getElementById("vaccine-list-box").innerHTML = `<h3>Sem vacinas encontradas</h3>`;

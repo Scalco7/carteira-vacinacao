@@ -49,6 +49,7 @@ async function renderPage() {
 
     nameInput.value = vaccine.name;
     dateInput.value = new Date(vaccine.date).toISOString().substring(0, 10);
+    img.src = vaccine.proofImg;
     doseInput.checked = true;
     if (vaccine.nextDose)
         nextDoseInput.value = new Date(vaccine.nextDose).toISOString().substring(0, 10)
@@ -76,12 +77,18 @@ async function saveVaccine() {
         alert("Selecione uma dose válida");
         return;
     }
+    if (!validateField(img.src)) {
+        stopLoading();
+        alert("Coloque um comprovante válido");
+        return;
+    }
 
     const vaccineObject = {
         name: name,
         date: (new Date(date)).toString(),
         nextDose: nextDose ? (new Date(nextDose)).toString() : null,
-        dose: dose
+        dose: dose,
+        proofImg: img.src,
     }
 
     if (isEdditing)
@@ -106,8 +113,9 @@ function saveProof(evt) {
         return;
     }
 
-    var r = new FileReader();
+    const r = new FileReader();
     r.onload = function () {
+        console.log(r.result)
         img.src = r.result;
     }
 
